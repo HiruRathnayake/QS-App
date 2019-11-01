@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Environmental Responsibility</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <h1 id="heading">CSR Performance Evaluation for Environmental Responsibility</h1>
+
+  <div class="button_group">
+    <button class="button">Home</button>
+    <a href="Reportc.html"><button class="button">Report</button></a>
+    <button class="button">FAQ</button>
+    <button class="button">Customization</button>
+  </div>
+
+  <table id="mytable">
+    <tr>
+      <th>Criteria</th>
+      <th>Points Allocated</th>
+      <th>Yes/No</th>
+    </tr>
+    <tr>
+      <td>Rate of staff and labour casualty</td>
+      <td>48.16%</td>
+      <td><input type="checkbox" name="1" class="checkbox" value="48.16"></td>
+    </tr>
+    <tr>
+      <td>Rate of timely project payment for sub-contractors</td>
+      <td>13.34%</td>
+      <td><input type="checkbox" name="2" class="checkbox" value="13.34"></td>
+    </tr>
+    <tr>
+      <td>Rate of social security coverage</td>
+      <td>12.88%</td>
+      <td><input type="checkbox" name="3" class="checkbox" value="12.88"></td>
+    </tr>
+    <tr>
+      <td>Rate of staff and labour turnover</td>
+      <td>11.12%</td>
+      <td><input type="checkbox" name="4" class="checkbox" value="11.12"></td>
+    </tr>
+    <tr>
+      <td>Consumer satisfaction degree</td>
+      <td>7.02%</td>
+      <td><input type="checkbox" name="5" class="checkbox" value="7.02"></td>
+    </tr>
+    <tr>
+      <td>Rate of tax to assets and tax paid</td>
+      <td>5.22%</td>
+      <td><input type="checkbox" name="6" class="checkbox" value="5.22"></td>
+    </tr>
+    <tr>
+      <td>Educational funds for employee</td>
+      <td>2.26%</td>
+      <td><input type="checkbox" name="7" class="checkbox" value="2.26"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: right">Total</td>
+      <td>
+        <p id="totalText">0.00%</p>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    var data;
+    window.onload = function () {
+      data = [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+    // call attachCheckboxHandlers() after the document is loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      attachCheckboxHandlers();
+    });
+
+    function attachCheckboxHandlers() {
+      // get reference to table containing checkboxes
+      var table = document.getElementById('mytable');
+      // get reference to checkbox elements in table
+      var check = table.getElementsByClassName('checkbox');
+      // assign updateTotal function to onclick property of each checkbox
+      for (var i = 0, len = check.length; i < len; i++) {
+        if (check[i].type === 'checkbox') {
+          check[i].onclick = updateTotal;
+        }
+      }
+    }
+
+    // called each time when you click on check boxes
+    function updateTotal(e) {
+      // get current value in totalText, using parseFloat since it is a string
+      var total = parseFloat(document.getElementById('totalText').innerHTML);
+
+      console.log(data[0]);
+      
+      console.log(data);
+      console.log(this.name);
+      // if check box is checked, add its value to total, otherwise subtract it
+      if (this.checked) {
+        total += parseFloat(this.value);
+        data[parseInt(this.name)-1] = true;
+      } else {
+        total -= parseFloat(this.value);
+        data[parseInt(this.name)-1] = false;
+      }
+
+      localStorage.setItem("formc",JSON.stringify(data));
+      localStorage.setItem("formc_tot",0.0817*total.toFixed(2).toString());
+      // format total with 2 decimal places 
+      // and use it to update value of totalText element
+      document.getElementById('totalText').innerHTML = total.toFixed(2).toString()+'%';
+    }
+
+    function getValue() {
+      alert('Total ' + document.getElementById('totalText').innerHTML.toString());
+    }
+  </script>
+
+  <a href="Reportc.html"><button id="left" class="button">Report</button></a>
+
+  <img src="Green-buildings.png" width="100%" height="120">
+
+</body>
+
+</html>

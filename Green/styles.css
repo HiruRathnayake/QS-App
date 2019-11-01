@@ -1,0 +1,57 @@
+#heading{
+              font-family: Algerian;
+              font-weight: bold;
+			  text-align:center;
+			  font-size: 5ch;
+			  color: rgb(66, 77, 4)
+		}
+        * {
+            box-sizing: border-box;
+        }
+        .column {
+  			float: left;
+  			width: 33.3%;
+  			padding: 5px
+		}
+        .button_group{
+            margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+        }
+        .button {
+            background-color: rgb(4, 71, 6); /* Green */
+            border: none;
+            color: white;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+            margin-left: 25%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f0e223;
+        }
+        tr:nth-child(odd) {
+            background-color: #23c0f0;
+        }
+        #left{
+            position: absolute;
+            right: 0px;
+            width: 150px;
+        }

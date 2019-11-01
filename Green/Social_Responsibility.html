@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<head>
+  <title>SOCIAL Responsibility</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <h1 id="heading">CSR Performance Evaluation for Social Responsibility</h1>
+
+  <div class="button_group">
+    <button class="button">Home</button>
+    <a href="Reporta.html"><button class="button">Report</button></a>
+    <button class="button">FAQ</button>
+    <button class="button">Customization</button>
+  </div>
+
+  <table id="mytable">
+    <tr>
+      <th>Criteria</th>
+      <th>Points Allocated</th>
+      <th>Yes/No</th>
+    </tr>
+    <tr>
+      <td>Compliance rate of pollution garbage</td>
+      <td>48.41%</td>
+      <td><input type="checkbox" name="1" class="checkbox" value="48.41"></td>
+    </tr>
+    <tr>
+      <td>Recycling rate of pollution</td>
+      <td>24.78%</td>
+      <td><input type="checkbox" name="2" class="checkbox" value="24.78"></td>
+    </tr>
+    <tr>
+      <td>Investment rate of environment</td>
+      <td>17.14</td>
+      <td><input type="checkbox" name="3" class="checkbox" value="17.14"></td>
+    </tr>
+    <tr>
+      <td>Discharge rate of construction protection</td>
+      <td>9.67%%</td>
+      <td><input type="checkbox" name="4" class="checkbox" value="9.67"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: right">Total</td>
+      <td>
+        <p id="totalText">0.00%</p>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    var data;
+    window.onload = function () {
+      data = [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+    // call attachCheckboxHandlers() after the document is loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      attachCheckboxHandlers();
+    });
+
+    function attachCheckboxHandlers() {
+      // get reference to table containing checkboxes
+      var table = document.getElementById('mytable');
+      // get reference to checkbox elements in table
+      var check = table.getElementsByClassName('checkbox');
+      // assign updateTotal function to onclick property of each checkbox
+      for (var i = 0, len = check.length; i < len; i++) {
+        if (check[i].type === 'checkbox') {
+          check[i].onclick = updateTotal;
+        }
+      }
+    }
+
+    // called each time when you click on check boxes
+    function updateTotal(e) {
+      // get current value in totalText, using parseFloat since it is a string
+      var total = parseFloat(document.getElementById('totalText').innerHTML);
+
+      console.log(data[0]);
+      
+      console.log(data);
+      console.log(this.name);
+      // if check box is checked, add its value to total, otherwise subtract it
+      if (this.checked) {
+        total += parseFloat(this.value);
+        data[parseInt(this.name)-1] = true;
+      } else {
+        total -= parseFloat(this.value);
+        data[parseInt(this.name)-1] = false;
+      }
+
+      localStorage.setItem("forma",JSON.stringify(data));
+      localStorage.setItem("forma_tot",0.1789*total.toFixed(2).toString());
+      // format total with 2 decimal places 
+      // and use it to update value of totalText element
+      document.getElementById('totalText').innerHTML = total.toFixed(2)+'%'.toString();
+    }
+
+    function getValue() {
+      alert('Total ' + document.getElementById('totalText').innerHTML.toString());
+    }
+  </script>
+
+  <a href="Reporta.html"><button id="left" class="button">Report</button></a>
+
+  <img src="Green-buildings.png" width="100%" height="300">
+
+</body>
+
+</html>

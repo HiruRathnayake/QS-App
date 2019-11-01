@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<head>
+  <title>ECONOMIC RESPONSIBILITY</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <h1 id="heading">CSR Performance Evaluation for Economic Responsibility</h1>
+
+  <div class="button_group">
+    <button class="button">Home</button>
+    <a href="Reportb.html"><button class="button">Report</button></a>
+    <button class="button">FAQ</button>
+    <button class="button">Customization</button>
+  </div>
+
+  <table id="mytable">
+    <tr>
+      <th>Criteria</th>
+      <th>Points Allocated</th>
+      <th>Yes/No</th>
+    </tr>
+    <tr>
+      <td>Return on Equity</td>
+      <td>50.45%</td>
+      <td><input type="checkbox" name="1" class="checkbox" value="50.45"></td>
+    </tr>
+    <tr>
+      <td>Rate of assets to liability </td>
+      <td>23.26%</td>
+      <td><input type="checkbox" name="2" class="checkbox" value="23.26"></td>
+    </tr>
+    <tr>
+      <td>Return on assets</td>
+      <td>17.50%</td>
+      <td><input type="checkbox" name="3" class="checkbox" value="17.50"></td>
+    </tr>
+    <tr>
+      <td>Rate of information disclosure</td>
+      <td>4.73%</td>
+      <td><input type="checkbox" name="4" class="checkbox" value="4.73"></td>
+    </tr>
+    <tr>
+      <td>Rate of dividend paid</td>
+      <td>4.06%</td>
+      <td><input type="checkbox" name="5" class="checkbox" value="4.06"></td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: right">Total</td>
+      <td>
+        <p id="totalText">0.00%</p>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    var data;
+    var total;
+    window.onload = function () {
+      data = [
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+    // call attachCheckboxHandlers() after the document is loaded
+    document.addEventListener("DOMContentLoaded", function () {
+      attachCheckboxHandlers();
+    });
+
+    function attachCheckboxHandlers() {
+      // get reference to table containing checkboxes
+      var table = document.getElementById('mytable');
+      // get reference to checkbox elements in table
+      var check = table.getElementsByClassName('checkbox');
+      // assign updateTotal function to onclick property of each checkbox
+      for (var i = 0, len = check.length; i < len; i++) {
+        if (check[i].type === 'checkbox') {
+          check[i].onclick = updateTotal;
+        }
+      }
+      
+    }
+
+    // called each time when you click on check boxes
+    function updateTotal(e) {
+      // get current value in totalText, using parseFloat since it is a string
+      total = parseFloat(document.getElementById('totalText').innerHTML);
+
+      console.log(data[0]);
+      
+      console.log(data);
+      console.log(this.name);
+      // if check box is checked, add its value to total, otherwise subtract it
+      if (this.checked) {
+        total += parseFloat(this.value);
+        data[parseInt(this.name)-1] = true;
+      } else {
+        total -= parseFloat(this.value);
+        data[parseInt(this.name)-1] = false;
+      }
+
+      localStorage.setItem("formb",JSON.stringify(data));
+      localStorage.setItem("formb_tot",0.7394*total.toFixed(2).toString());
+      // format total with 2 decimal places 
+      // and use it to update value of totalText element
+      
+      document.getElementById('totalText').innerHTML = total.toFixed(2).toString()+'%';
+
+    }
+    
+    function getValue() {
+      alert('Total ' + document.getElementById('totalText').innerHTML.toString());
+    }
+  </script>
+
+  <a href="Reportb.html"><button id="left" class="button">Report</button></a>
+
+  <img src="Green-buildings.png" width="100%" height="200">
+
+</body>
+
+</html>
